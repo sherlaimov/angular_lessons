@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="script.js"></script>
+    <style>
+        .ng-scope {
+        border: 1px solid orangered;
+        }
+    </style>
+</head>
+
+<body ng-app="App">
+<h1>Understand Angular Digest</h1>
+
+<hr />
+<div ng-controller="digestCtrl">
+    {{val}}
+    <button ng-click="inc()">Click</button>
+</div>
+</body>
+
+</html>

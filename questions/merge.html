@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Merging objects</title>
+</head>
+<body>
+  <script>
+
+    var films = {
+      Jurassic : {
+        title: 'Title 1',
+      },
+      Park : {
+        title: 'Title 2',
+      }
+    };
+
+    var obj2 = {
+      wft: {
+        title: 'Blah'
+      }
+    };
+
+    function extend (target) {
+
+      for(var i=1; i<arguments.length; ++i) {
+        var from = arguments[i];
+        if(typeof from !== 'object') continue;
+        for(var j in from) {
+          if(from.hasOwnProperty(j)) {
+            target[j] = typeof from[j]==='object' ? extend({}, target[j], from[j]) : from[j];
+          }
+        }
+      }
+      return target;
+    }
+
+
+    var merged = extend(films, obj2);
+
+//DEEP EQUAL
+
+    function deepEqual(a, b) {
+      if (a === b) return true;
+
+      if (a == null || typeof a != "object" ||
+        b == null || typeof b != "object")
+        return false;
+
+      var propsInA = 0, propsInB = 0;
+
+      for (var prop in a)
+        propsInA += 1;
+
+      for (var prop in b) {
+        propsInB += 1;
+        if (!(prop in a) || !deepEqual(a[prop], b[prop]))
+          return false;
+      }
+
+      return propsInA == propsInB;
+    }
+
+    var obj = {prop1: {is: "an"}, prop2: 2};
+    // console.log(deepEqual(obj, obj));
+    console.log(deepEqual(obj, {prop1: 1, prop2: 2}));
+  </script>
+</body>
+</html>
